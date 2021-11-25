@@ -65,6 +65,40 @@ export default class Game {
   private step = (timestamp: number): void => {
     // To make it as accurate as possible, incorporate the time t
     // At 60fps, each interval is approximately 17ms.
+    const gameover = this.gameSimulation(timestamp);
+
+    // draw: the items on the canvas
+    // Get the canvas rendering context
+    this.screenRender();
+
+    // Call this method again on the next animation frame
+    if (!gameover) {
+      requestAnimationFrame(this.step);
+    }
+  };
+
+  private screenRender() {
+    const ctx = this.canvas.getContext('2d');
+    // Clear the entire canvas
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Draw the player
+    ctx.fillStyle = 'red';
+    ctx.beginPath();
+    const playerPositionY = this.canvas.height - 50;
+    ctx.ellipse(this.playerPositionX, playerPositionY, 50, 50, 0, 0, 2 * Math.PI);
+    ctx.fill();
+
+    // Draw the ball
+    ctx.fillStyle = 'blue';
+    ctx.beginPath();
+    // reverse height, so the ball falls down
+    const y = this.canvas.height - this.ballPositionY;
+    ctx.ellipse(this.ballPositionX, y, this.ballRadius, this.ballRadius, 0, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+
+  private gameSimulation(timestamp: number) {
     const t = timestamp - this.lastTickTimeStamp;
     this.lastTickTimeStamp = timestamp;
 
@@ -104,31 +138,6 @@ export default class Game {
     const distance = Math.sqrt(distX * distX + distY * distY);
     // Collides is distance <= sum of radii of both circles
     const gameover = distance <= (this.ballRadius + 50);
-
-    // draw: the items on the canvas
-    // Get the canvas rendering context
-    const ctx = this.canvas.getContext('2d');
-    // Clear the entire canvas
-    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    // Draw the player
-    ctx.fillStyle = 'red';
-    ctx.beginPath();
-    const playerPositionY = this.canvas.height - 50;
-    ctx.ellipse(this.playerPositionX, playerPositionY, 50, 50, 0, 0, 2 * Math.PI);
-    ctx.fill();
-
-    // Draw the ball
-    ctx.fillStyle = 'blue';
-    ctx.beginPath();
-    // reverse height, so the ball falls down
-    const y = this.canvas.height - this.ballPositionY;
-    ctx.ellipse(this.ballPositionX, y, this.ballRadius, this.ballRadius, 0, 0, 2 * Math.PI);
-    ctx.fill();
-
-    // Call this method again on the next animation frame
-    if (!gameover) {
-      requestAnimationFrame(this.step);
-    }
-  };
+    return gameover;
+  }
 }
