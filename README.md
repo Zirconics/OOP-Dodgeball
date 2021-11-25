@@ -61,6 +61,7 @@ Or try:
 ## Authors
 
 * **Daan de Waard** - *Initial work* - [dwaard](https://github.com/dwaard)
+* **Kevin Oreel** - *Student that worked on this assignment* - [Zirconics](https://github.com/Zirconics)
 
 See also the list of [contributors](url-to-project-contributors-page) who 
 participated in this project.
