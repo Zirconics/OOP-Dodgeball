@@ -137,7 +137,7 @@ export default class GameLoop {
       this.state = GameLoop.STATE_RUNNING;
     }
 
-    // this.scene.processInput();
+    this.scene.processInput();
 
     // Let the game update itself
     let shouldStop = false;

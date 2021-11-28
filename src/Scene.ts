@@ -1,5 +1,6 @@
 import Game from './Game.js';
 import Ball from './Ball.js';
+import KeyListener from './KeyListener.js';
 
 export default class Scene {
   private canvas: HTMLCanvasElement;
@@ -7,6 +8,8 @@ export default class Scene {
   private playerPositionX: number;
 
   private balls: Array<Ball> = [];
+
+  private keyboard: KeyListener;
 
   /**
    * Construc a new instance of this class
@@ -27,6 +30,9 @@ export default class Scene {
 
     // Set the player at the center
     this.playerPositionX = this.canvas.width / 2;
+
+    // Initialise keyboard listener
+    this.keyboard = new KeyListener();
   }
 
   // /**
@@ -78,5 +84,16 @@ export default class Scene {
     this.balls.forEach((ball: Ball) => {
       ball.render(this.canvas, ctx);
     });
+  }
+
+  /**
+ * process input
+ */
+  public processInput(): void {
+    if (this.keyboard.isKeyDown(KeyListener.KEY_LEFT)) {
+      this.playerPositionX -= 15;
+    } if (this.keyboard.isKeyDown(KeyListener.KEY_RIGHT)) {
+      this.playerPositionX += 15;
+    }
   }
 }

@@ -26,7 +26,7 @@ export default class Game {
 
   public static readonly BALL_COLOR = 'blue';
 
-  public static readonly INITIAL_BALL_COUNT = 10;
+  public static readonly INITIAL_BALL_COUNT = 1;
 
   // Constants for the player
   public static readonly PLAYER_BALL_RADIUS = 50;
