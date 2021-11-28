@@ -33,6 +33,8 @@ export default class Game {
 
   public static readonly PLAYER_COLOR = 'red';
 
+  public static readonly PLAYER_SPEED = 15;
+
   private scene: Scene;
 
   private gameloop: GameLoop;

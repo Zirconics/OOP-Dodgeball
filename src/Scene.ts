@@ -25,7 +25,7 @@ export default class Scene {
 
     // Spawn the Balls
     for (let i = 0; i < Game.INITIAL_BALL_COUNT; i++) {
-      this.balls.push(new Ball(this.canvas));
+      this.balls.push(new Ball(this.canvas, 'red'));
     }
 
     // Set the player at the center
@@ -34,13 +34,6 @@ export default class Scene {
     // Initialise keyboard listener
     this.keyboard = new KeyListener();
   }
-
-  // /**
-  //   * Handles any user input that has happened since the last call
-  //   */
-  // public processInput(): void {
-
-  // }
 
   /**
    * Update the game
@@ -91,9 +84,9 @@ export default class Scene {
  */
   public processInput(): void {
     if (this.keyboard.isKeyDown(KeyListener.KEY_LEFT)) {
-      this.playerPositionX -= 15;
+      this.playerPositionX -= Game.PLAYER_SPEED;
     } if (this.keyboard.isKeyDown(KeyListener.KEY_RIGHT)) {
-      this.playerPositionX += 15;
+      this.playerPositionX += Game.PLAYER_SPEED;
     }
   }
 }

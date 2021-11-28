@@ -11,12 +11,15 @@ export default class Ball {
 
   private speedY: number;
 
+  private color: string;
+
   /**
    * Constructs a new Ball
    *
    * @param canvas the canvas to place the ball on
    */
-  public constructor(canvas: HTMLCanvasElement) {
+  public constructor(canvas: HTMLCanvasElement, color: string) {
+    this.color = color;
     this.radius = Game.MIN_BALL_RADIUS + Game.BALL_RADIUS_SCATTER * Math.random();
     this.speedX = Game.MIN_BALL_X_SPEED + Game.BALL_X_SPEED_SCATTER * Math.random();
     this.speedY = Game.MIN_BALL_Y_SPEED;
